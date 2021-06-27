@@ -1,0 +1,52 @@
+body, body * {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+
+#container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#textDiv {
+    background-color: #bea0af;
+    width: 420px;
+    height: 150px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+p {
+    color: #3c3341;
+    font-size: 4rem;
+    font-family: 'Manrope', sans-serif;
+    z-index: 1;
+}
+
+img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+canvas {
+    width: 420px;
+    height: 150px;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+}
