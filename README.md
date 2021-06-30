@@ -6,6 +6,10 @@
 <p>A subathon timer that increases when someone subscribes, donates money, donates bits or purchases streamloots chests.</p>
 <br/>
 
+<h2>Preview</h2>
+<h3 align="center"><img width="40%" src="./preview.gif"></h3>
+<br/>
+
 <h2>Usage</h2>
 <p>After cloning this repository you'll have to edit the "config.js" file with any plain text editor, then change the value of the variables acording to what you want:</p>
 
