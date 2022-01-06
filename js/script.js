@@ -1,76 +1,60 @@
-const start = () => {
-    screenWidth = window.innerWidth;
-    screenHeight = window.innerHeight;
+const timeText = document.getElementById("timeText");
 
-    endingTime = new Date(Date.now());
-    endingTime = timeFunc.addHours(endingTime, initialHours);
-    endingTime = timeFunc.addMinutes(endingTime, initialMinutes);
-    endingTime = timeFunc.addSeconds(endingTime, initialSeconds);
+let endingTime = new Date(Date.now());
+endingTime = timeFunc.addHours(endingTime, initialHours);
+endingTime = timeFunc.addMinutes(endingTime, initialMinutes);
+endingTime = timeFunc.addSeconds(endingTime, initialSeconds);
 
-    timeText = document.getElementById("timeText");
+let countdownEnded = false;
+let users = [];
+let time;
 
-    const getNextTime = () => {
-        let currentTime = new Date(Date.now());
-        let differenceTime = endingTime - currentTime;
-        let time = `${timeFunc.getHours(differenceTime)}:${timeFunc.getMinutes(differenceTime)}:${timeFunc.getSeconds(differenceTime)}`;
-        if (time === "00:00:00") {
-            clearInterval(inter);
-            time = "¡FIN!";
-            console.log(time);
-        }
-        timeText.innerText = time;
+const getNextTime = () => {
+    let currentTime = new Date(Date.now());
+    let differenceTime = endingTime - currentTime;
+    time = `${timeFunc.getHours(differenceTime)}:${timeFunc.getMinutes(differenceTime)}:${timeFunc.getSeconds(differenceTime)}`;
+    if (differenceTime <= 0) {
+        clearInterval(countdownUpdater);
+        countdownEnded = true;
+        time = "00:00:00";
     }
+    timeText.innerText = time;
+};
 
-    const inter = setInterval(() => {
-        getNextTime();
-    }, 100);
+let countdownUpdater = setInterval(() => {
+    getNextTime();
+}, 100);
 
 
 
-    socket = io(`https://sockets.streamlabs.com?token=${streamlabsToken}`, {transports: ['websocket']})
+const addTime = async (time, s) => {
+    endingTime = timeFunc.addSeconds(time, s);
+    let addedTime = document.createElement("p");
+    addedTime.classList = "addedTime";
+    addedTime.innerText = `+${s}s`;
+    document.body.appendChild(addedTime);
+    addedTime.style.display = "block";
+    await sleep(50);
+    addedTime.style.left = `${randomInRange(35, 65)}%`;
+    addedTime.style.top = `${randomInRange(25, 45)}%`;
+    addedTime.style.opacity = "1";
+    await sleep(2500);
+    addedTime.style.opacity = "0";
+    await sleep(500);
+    addedTime.remove();
+};
 
-    socket.on("connect", () => {
-        console.log("Socket Connected");
-    });
 
-    socket.on("event", (event) => {
-        console.log(event);
-        if (event.type == "subscription" || event.type == "resub") {
-            endingTime = timeFunc.addSeconds(endingTime, secondsPerSub);
+
+const testAddTime = (times, delay) => {
+    let addTimeInterval = setInterval(async () => {
+        if (times > 0) {
+            await sleep(randomInRange(50, delay-50));
+            addTime(endingTime, 30);
+            --times;
         }
-        else if (event.type == "donation") {
-            if (parseInt(event.message[0].amount) >= quantityDono) {
-                endingTime = timeFunc.addSeconds(endingTime, secondsPerDono);
-            }
+        else {
+            clearInterval(addTimeInterval);
         }
-        else if (event.type == "bits") {
-            if (parseInt(event.message[0].amount) >= quantityBits) {
-                endingTime = timeFunc.addSeconds(endingTime, secondsPerBits);
-            }
-        }
-    });
-
-    socket.on("disconnect", () => {
-        console.log("Socket Disconnected");
-    });
-
-
-
-    evtSourceStreamLoots = new EventSource(`https://widgets.streamloots.com/alerts/${streamlootsToken}/media-stream`);
-
-    evtSourceStreamLoots.onmessage = async (event) => {
-        data = await JSON.parse(event.data);
-        if (data.data.type == "purchase") {
-            if (typeof(data.data.fields[0].value) == "number") {
-                if (data.data.fields[0].value >= quantityChest) {
-                    endingTime = timeFunc.addSeconds(endingTime, secondsPerChest);
-                }
-            }
-            else {
-                if (data.data.fields[1].value >= quantityChest) {
-                    endingTime = timeFunc.addSeconds(endingTime, secondsPerChest);
-                }
-            }
-        }
-    }
-}
+    }, delay);
+};

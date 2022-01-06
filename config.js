@@ -1,17 +1,36 @@
-var streamlabsToken = ""
-var streamlootsToken = ""
+// Login Data
+var twitch_channel_name = ""
+var streamlabs_token = ""
+var streamelements_token = ""
+var streamloots_token = ""
 
-var initialHours = 3
-var initialMinutes = 30
-var initialSeconds = 40
+// Initial Counter Config
+var initialHours = 5
+var initialMinutes = 0
+var initialSeconds = 0
 
-var secondsPerSub = 300
+// General Twitch, Streamlabs And StreamElements Config
+var seconds_added_per_sub_prime = 30
+var seconds_added_per_sub_tier1 = 30
+var seconds_added_per_sub_tier2 = 60
+var seconds_added_per_sub_tier3 = 120
 
-var secondsPerDono = 300
-var quantityDono = 5
+var seconds_added_per_resub_prime = 30
+var seconds_added_per_resub_tier1 = 30
+var seconds_added_per_resub_tier2 = 60
+var seconds_added_per_resub_tier3 = 120
 
-var secondsPerChest = 300
-var quantityChest = 10
+var seconds_added_per_giftsub_tier1 = 30
+var seconds_added_per_giftsub_tier2 = 60
+var seconds_added_per_giftsub_tier3 = 120
 
-var secondsPerBits = 300
-var quantityBits = 500
+var min_amount_of_bits = 500
+var seconds_added_per_bits = 30
+
+// Streamlabs And StreamElements Config
+var min_donation_amount = 5
+var seconds_added_per_donation = 30
+
+// Streamloots Config
+var min_amount_of_chests = 5
+var seconds_added_per_chests = 30

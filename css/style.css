@@ -1,6 +1,7 @@
 body, body * {
     padding: 0;
     margin: 0;
+    font-family: 'Manrope', sans-serif;
 }
 
 body {
@@ -10,28 +11,36 @@ body {
 
 
 
+:root {
+    --background-color: #f7fff7;
+    --shadow-color: #00000020;
+    --text-color: #292f36;
+}
+
+
+
 #container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: var(--background-color);
+    box-shadow: 0 0 1.25rem 0.5rem var(--shadow-color);
+    width: 500px;
+    height: 180px;
+    border-radius: 30px;
 }
 
 #textDiv {
-    background-color: #bea0af;
-    width: 420px;
-    height: 150px;
-    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    height: 100%;
 }
 
 p {
-    color: #3c3341;
-    font-size: 4rem;
-    font-family: 'Manrope', sans-serif;
+    color: var(--text-color);
+    font-size: 5rem;
     z-index: 1;
 }
 
@@ -42,11 +51,28 @@ img {
 }
 
 canvas {
-    width: 420px;
-    height: 150px;
+    width: 500px;
+    height: 180px;
     border-radius: 20px;
     position: absolute;
     top: 0;
     bottom: 0;
     z-index: 2;
+}
+
+
+
+.addedTime {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    display: none;
+    z-index: 5;
+    font-weight: 400;
+    font-size: 3.25rem;
+    color: var(--background-color);
+    text-shadow: 0 0 1.5rem var(--text-color);
+    transition: top 1s ease-out, opacity .5s ease-out;
 }
