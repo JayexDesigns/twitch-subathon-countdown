@@ -1,5 +1,9 @@
 if (twitch_channel_name !== "") {
     const client = new tmi.client({
+        connection: {
+            reconnect: true,
+            secure: true,
+        },
         channels: [twitch_channel_name],
     });
 
