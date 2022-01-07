@@ -36,7 +36,7 @@ const addTime = async (time, s) => {
     addedTime.style.display = "block";
     await sleep(50);
     addedTime.style.left = `${randomInRange(35, 65)}%`;
-    addedTime.style.top = `${randomInRange(25, 45)}%`;
+    addedTime.style.top = `${randomInRange(15, 40)}%`;
     addedTime.style.opacity = "1";
     await sleep(2500);
     addedTime.style.opacity = "0";

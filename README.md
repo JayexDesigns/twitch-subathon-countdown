@@ -7,7 +7,7 @@
 <br/>
 
 <h2>Preview</h2>
-<h3 align="center"><img width="40%" src="./preview.gif"></h3>
+<h3 align="center"><img width="90%" src="./preview.gif"></h3>
 <br/>
 
 <h2>Usage</h2>
