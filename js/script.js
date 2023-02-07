@@ -29,6 +29,11 @@ let countdownUpdater = setInterval(() => {
 
 const addTime = async (time, s) => {
     endingTime = timeFunc.addSeconds(time, s);
+	if (!(maxHours == 0 && maxMinutes == 0 && maxSeconds == 0)) {
+		let maxTime = timeFunc.getMilliseconds(new Date(Date.now()), maxHours, maxMinutes, maxSeconds);
+		if (endingTime.getTime() > maxTime.getTime()) endingTime = maxTime;
+	}
+
     let addedTime = document.createElement("p");
     addedTime.classList = "addedTime";
     addedTime.innerText = `+${s}s`;

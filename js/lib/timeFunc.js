@@ -48,5 +48,9 @@ timeFunc = {
         }
         seconds = (seconds.length < 2) ? `0${seconds}` : seconds;
         return seconds;
-    }
+    },
+
+	getMilliseconds(time, hours, minutes, seconds) {
+		return new Date(time.getTime() + hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000);
+	}
 };
